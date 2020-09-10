@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 178404756}
   - component: {fileID: 178404755}
   - component: {fileID: 178404760}
+  - component: {fileID: 178404761}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -252,6 +253,21 @@ MonoBehaviour:
   xTurnSpeed: 1
   rollSpeed: 0.1
   invertY: 0
+--- !u!114 &178404761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178404754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ee61b9b5986a449b8f54a2ba932b0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interact:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &435755849
 GameObject:
   m_ObjectHideFlags: 0
