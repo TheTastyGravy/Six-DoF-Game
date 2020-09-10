@@ -42,13 +42,13 @@ public class ShootScript : MonoBehaviour
             lastShot = Time.time;
 
             // Create new projectile
-            GameObject newProj = GameObject.Instantiate(proj, firePoint.position, firePoint.rotation);
+            GameObject newProj = Instantiate(proj, firePoint.position, firePoint.rotation);
             newProj.GetComponent<ProjectileScript>().Setup(1f, projForce);
             // The projectile cant collide with the object that fired it
             Physics.IgnoreCollision(newProj.GetComponent<Collider>(), GetComponent<Collider>());
 
             // Reduce the players ammo
-            //GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerResources>().CollectAmmo(-ammoCost);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().CollectAmmo(-ammoCost);
         }
     }
 }
