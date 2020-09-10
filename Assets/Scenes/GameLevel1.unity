@@ -382,7 +382,7 @@ MonoBehaviour:
   joystickCircle: {fileID: 21300000, guid: fce904ad37541de4aad3710f23bdbd5a, type: 3}
   joystickButton: {fileID: 21300000, guid: fce904ad37541de4aad3710f23bdbd5a, type: 3}
   buttonImg: {fileID: 21300000, guid: fce904ad37541de4aad3710f23bdbd5a, type: 3}
-  onMobile: 1
+  onMobile: 0
   joystickValues: []
   touchButtonDown: 
 --- !u!4 &481400582
