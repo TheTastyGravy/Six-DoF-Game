@@ -17,6 +17,9 @@ public class MobileControllerScript : MonoBehaviour
     [System.Serializable]
     private class Joystick
     {
+        // Key for joystickValues
+        public string name;
+
         public Image backgroundCircle;
         public Image mainButton;
         public Rect defaultArea;
@@ -32,6 +35,9 @@ public class MobileControllerScript : MonoBehaviour
     [System.Serializable]
     private class TouchButton
     {
+        // Key for touchButtonDown
+        public string name;
+
         public Image buttonImage;
         public Rect buttonArea;
         public int touchID = -1;
@@ -44,14 +50,14 @@ public class MobileControllerScript : MonoBehaviour
     /// <summary>
     /// Holds a Vector2 for each joystick, in range of -1 to 1
     /// </summary>
-    [HideInInspector] public List<Vector2> joystickValues = new List<Vector2>();
+    [HideInInspector] public Dictionary<string, Vector2> joystickValues = new Dictionary<string, Vector2>();
 
     // Used to update touch buttons
     List<TouchButton> buttons = new List<TouchButton>();
     /// <summary>
     /// Holds a bool for each touch button, set to true if it is down
     /// </summary>
-    [HideInInspector] public List<bool> touchButtonDown = new List<bool>();
+    [HideInInspector] public Dictionary<string, bool> touchButtonDown = new Dictionary<string, bool>();
 
 
 
@@ -59,18 +65,20 @@ public class MobileControllerScript : MonoBehaviour
     /// <summary>
     /// Create a new joystick, accessable from 'joystickValues'
     /// </summary>
+    /// <param name="name"> The name used as the joystick's key in 'joystickValues' </param>
     /// <param name="position"> The position of the outer circle relative to the bottom left corner </param>
     /// <param name="size"> The size of the outer circle </param>
     /// <param name="movementRadius"> How far from the center can the joystick move? </param>
     /// <param name="deadzone"> How far from the center does the button have to move to be regestered? </param>
-    public void CreateNewJoystick(Vector2 position, float size = 120f, float movementRadius = 75f, float deadzone = 19f)
+    public void CreateNewJoystick(string name, Vector2 position, float size = 120f, float movementRadius = 75f, float deadzone = 19f)
     {
-        CreateNewJoystick(position, Vector2.zero, Vector2.zero, Vector2.zero, size, movementRadius, deadzone);
+        CreateNewJoystick(name, position, Vector2.zero, Vector2.zero, Vector2.zero, size, movementRadius, deadzone);
     }
 
     /// <summary>
     /// Create a new joystick, accessable from 'joystickValues'
     /// </summary>
+    /// <param name="name"> The name used as the joystick's key in 'joystickValues' </param>
     /// <param name="position"> The anchored position of the outer circle. This is relative to the pivot and anchor </param>
     /// <param name="pivot"> The outer circles pivot </param>
     /// <param name="anchorMin"> The outer circles min anchor </param>
@@ -78,11 +86,12 @@ public class MobileControllerScript : MonoBehaviour
     /// <param name="size"> The size of the outer circle </param>
     /// <param name="movementRadius"> How far from the center can the joystick move? </param>
     /// <param name="deadzone"> How far from the center does the button have to move to be regestered? </param>
-    public void CreateNewJoystick(Vector2 position, Vector2 pivot, Vector2 anchorMin, Vector2 anchorMax, float size = 120f, float movementRadius = 75f, float deadzone = 19f)
+    public void CreateNewJoystick(string name, Vector2 position, Vector2 pivot, Vector2 anchorMin, Vector2 anchorMax, float size = 120f, float movementRadius = 75f, float deadzone = 19f)
     {
         // Create a new joystick
         Joystick newJoystick = new Joystick
         {
+            name = name,
             movementRadius = movementRadius,
             deadzone = deadzone
         };
@@ -133,7 +142,7 @@ public class MobileControllerScript : MonoBehaviour
 
         // Add the new joystick to the list
         joysticks.Add(newJoystick);
-        joystickValues.Add(Vector2.zero);
+        joystickValues.Add(name, Vector2.zero);
     }
 
 
@@ -141,19 +150,24 @@ public class MobileControllerScript : MonoBehaviour
     /// <summary>
     /// Create a new touch button, accessable from 'touchButtonDown'
     /// </summary>
+    /// <param name="name"> The name used as the button's key in 'touchButtonDown' </param>
     /// <param name="position"> The position of the button relative to the bottom left corner </param>
-    public void CreateNewButton(Vector2 position, float size = 100f)
+    public void CreateNewButton(string name, Vector2 position, float size = 100f)
     {
-        CreateNewButton(position, Vector2.zero, Vector2.zero, Vector2.zero, size);
+        CreateNewButton(name, position, Vector2.zero, Vector2.zero, Vector2.zero, size);
     }
 
     /// <summary>
     /// Create a new touch button, accessable from 'touchButtonDown'
     /// </summary>
+    /// <param name="name"> The name used as the button's key in 'touchButtonDown' </param>
     /// <param name="position"> The anchored position of the button. This is relative to the pivot and anchor </param>
-    public void CreateNewButton(Vector2 position, Vector2 pivot, Vector2 anchorMin, Vector2 anchorMax, float size = 100f)
+    public void CreateNewButton(string name, Vector2 position, Vector2 pivot, Vector2 anchorMin, Vector2 anchorMax, float size = 100f)
     {
-        TouchButton newButton = new TouchButton();
+        TouchButton newButton = new TouchButton
+        {
+            name = name
+        };
 
         // Setup button image
         GameObject cntrlTmpObj = new GameObject("Touch Button");
@@ -181,7 +195,7 @@ public class MobileControllerScript : MonoBehaviour
 
         // Add the new button to the list
         buttons.Add(newButton);
-        touchButtonDown.Add(false);
+        touchButtonDown.Add(name, false);
     }
 
 
@@ -302,25 +316,25 @@ public class MobileControllerScript : MonoBehaviour
                 joysticks[i].mainButton.rectTransform.position = new Vector3(joystickX, joystickY);
 
 
-                joystickValues[i] = joysticks[i].mainButton.rectTransform.position - (Vector3)joysticks[i].centerPoint;
+                joystickValues[joysticks[i].name] = joysticks[i].mainButton.rectTransform.position - (Vector3)joysticks[i].centerPoint;
 
                 // Clamp joystick movement to -1/1
                 Vector2 newValue;
-                if (Mathf.Abs(joystickValues[i].x) < joysticks[i].deadzone)
+                if (Mathf.Abs( joystickValues[joysticks[i].name].x) < joysticks[i].deadzone)
                     newValue.x = 0f;
                 else
-                    newValue.x = Mathf.Clamp(joystickValues[i].x / joysticks[i].movementRadius, -1.000f, 1.000f);
-                if (Mathf.Abs(joystickValues[i].y) < joysticks[i].deadzone)
+                    newValue.x = Mathf.Clamp(joystickValues[joysticks[i].name].x / joysticks[i].movementRadius, -1.000f, 1.000f);
+                if (Mathf.Abs(joystickValues[joysticks[i].name].y) < joysticks[i].deadzone)
                     newValue.y = 0f;
                 else
-                    newValue.y = Mathf.Clamp(joystickValues[i].y / joysticks[i].movementRadius, -1.000f, 1.000f);
-                joystickValues[i] = newValue;
+                    newValue.y = Mathf.Clamp(joystickValues[joysticks[i].name].y / joysticks[i].movementRadius, -1.000f, 1.000f);
+                joystickValues[joysticks[i].name] = newValue;
             }
             else
             {
                 // Return to the center
                 joysticks[i].mainButton.rectTransform.anchoredPosition = Vector3.zero;
-                joystickValues[i] = Vector2.zero;
+                joystickValues[joysticks[i].name] = Vector2.zero;
             }
         }
 
@@ -400,7 +414,7 @@ public class MobileControllerScript : MonoBehaviour
             buttons[i].isActive = true;
             buttons[i].touchID = touchID;
 
-            touchButtonDown[i] = true;
+            touchButtonDown[buttons[i].name] = true;
         }
     }
 
@@ -418,7 +432,7 @@ public class MobileControllerScript : MonoBehaviour
             buttons[i].isActive = false;
             buttons[i].touchID = -1;
 
-            touchButtonDown[i] = false;
+            touchButtonDown[buttons[i].name] = false;
         }
     }
 }

@@ -59,7 +59,7 @@ public class PlayerManager : MonoBehaviour
         if (mobileScript.onMobile)
         {
             // Create new touch button
-            mobileScript.CreateNewButton(new Vector2(150, 250), 60);
+            mobileScript.CreateNewButton("Fire", new Vector2(150, 250), 60);
         }
 
         // Set UI text
@@ -75,7 +75,7 @@ public class PlayerManager : MonoBehaviour
         // Get input. Either use touch button for mobile or axis for mouse and controller
         float fire;
         if (mobileScript.onMobile)
-            fire = (mobileScript.touchButtonDown[0]) ? 1 : 0;
+            fire = ((bool)mobileScript.touchButtonDown["Fire"]) ? 1 : 0;
         else
             fire = Input.GetAxisRaw("Fire1");
         

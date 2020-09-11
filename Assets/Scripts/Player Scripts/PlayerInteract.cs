@@ -24,7 +24,7 @@ public class PlayerInteract : MonoBehaviour
         if (mobileScript.onMobile)
         {
             // Create new touch button at the bottom right
-            mobileScript.CreateNewButton(new Vector2(-150, 250), new Vector2(1, 0), new Vector2(1, 0), new Vector2(1, 0), 60);
+            mobileScript.CreateNewButton("Interact", new Vector2(-150, 250), new Vector2(1, 0), new Vector2(1, 0), new Vector2(1, 0), 60);
         }
     }
 
@@ -35,7 +35,7 @@ public class PlayerInteract : MonoBehaviour
         // Get input. Either use touch button for mobile, or axis for mouse and controller
         float input;
         if (mobileScript.onMobile)
-            input = (mobileScript.touchButtonDown[1]) ? 1 : 0;
+            input = ((bool)mobileScript.touchButtonDown["Interact"]) ? 1 : 0;
         else
             input = Input.GetAxisRaw("Interact");
 

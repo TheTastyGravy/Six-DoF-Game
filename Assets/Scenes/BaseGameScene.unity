@@ -1216,8 +1216,6 @@ MonoBehaviour:
   joystickButton: {fileID: 21300000, guid: fce904ad37541de4aad3710f23bdbd5a, type: 3}
   buttonImg: {fileID: 21300000, guid: fce904ad37541de4aad3710f23bdbd5a, type: 3}
   onMobile: 0
-  joystickValues: []
-  touchButtonDown: 
 --- !u!4 &481400582
 Transform:
   m_ObjectHideFlags: 0

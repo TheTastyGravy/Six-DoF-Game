@@ -33,8 +33,8 @@ public class SixDoFController : MonoBehaviour
         if (mobileScript.onMobile)
         {
             // Bottom left and bottom right
-            mobileScript.CreateNewJoystick(new Vector2(100, 100));
-            mobileScript.CreateNewJoystick(new Vector2(-100, 100), new Vector2(1, 0), new Vector2(1, 0), new Vector2(1, 0));
+            mobileScript.CreateNewJoystick("Left Stick", new Vector2(100, 100));
+            mobileScript.CreateNewJoystick("Right Stick", new Vector2(-100, 100), new Vector2(1, 0), new Vector2(1, 0), new Vector2(1, 0));
         }
         else
         {
@@ -62,9 +62,9 @@ public class SixDoFController : MonoBehaviour
         {
             return new Vector3
             {
-                x = mobileScript.joystickValues[0].x,
+                x = mobileScript.joystickValues["Left Stick"].x,
                 y = 0f,
-                z = mobileScript.joystickValues[0].y
+                z = mobileScript.joystickValues["Left Stick"].y
             };
         }
         else
@@ -85,8 +85,8 @@ public class SixDoFController : MonoBehaviour
         {
             rot = new Vector3
             {
-                x = mobileScript.joystickValues[1].y * yTurnSpeed * 0.1f * (invertY ? 1 : -1),
-                y = mobileScript.joystickValues[1].x * xTurnSpeed * 0.1f,
+                x = mobileScript.joystickValues["Right Stick"].y * yTurnSpeed * 0.1f * (invertY ? 1 : -1),
+                y = mobileScript.joystickValues["Right Stick"].x * xTurnSpeed * 0.1f,
                 z = 0f
             };
         }
