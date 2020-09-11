@@ -50,7 +50,7 @@ public class TurretScript : MonoBehaviour
         else
         {
             // Face forward
-            rotationPoint.rotation = Quaternion.identity;
+            rotationPoint.localRotation = Quaternion.identity;
         }
     }
 
