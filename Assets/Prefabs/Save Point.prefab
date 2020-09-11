@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7799702782970112622}
   - component: {fileID: 7799702782970112623}
   - component: {fileID: 7799702782970112595}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Save Point
   m_TagString: SavePoint
   m_Icon: {fileID: 0}
