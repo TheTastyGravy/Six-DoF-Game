@@ -10,7 +10,8 @@ public class SavePointScript : Interactable
     [Min(0)] public int index;
 
 
-    void Awake()
+    // Start is called after other scenes have been loaded, so the player will exist
+    void Start()
     {
         // Get the save script
         saveScript = FindObjectOfType<SaveGameScript>();

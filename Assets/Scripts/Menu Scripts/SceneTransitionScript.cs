@@ -23,7 +23,8 @@ public class SceneTransitionScript : MonoBehaviour
             GetComponent<SaveGameScript>().SaveDataToDisk(false);
         }
 
-        // Load the current level
+        // Load the current level, with the base scene containing the player, canvas, etc
         SceneManager.LoadScene(level, LoadSceneMode.Single);
+        SceneManager.LoadScene("BaseGameScene", LoadSceneMode.Additive);
     }
 }
