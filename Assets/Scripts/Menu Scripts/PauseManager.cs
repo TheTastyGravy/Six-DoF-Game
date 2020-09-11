@@ -77,6 +77,7 @@ public class PauseManager : MonoBehaviour
         ChangePauseState(PauseState.unpause);
         // Reload the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+        SceneManager.LoadScene("BaseGameScene", LoadSceneMode.Additive);
     }
     public void RestartButtonClick()
     {
@@ -87,6 +88,7 @@ public class PauseManager : MonoBehaviour
         ChangePauseState(PauseState.unpause);
         // Reload the current scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+        SceneManager.LoadScene("BaseGameScene", LoadSceneMode.Additive);
     }
     public void NextLevelButtonClicK()
     {
