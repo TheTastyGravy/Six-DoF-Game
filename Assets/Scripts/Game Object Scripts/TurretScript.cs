@@ -40,6 +40,10 @@ public class TurretScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Prevent the turret from being able to fire behind it
+        if (Vector3.Angle(transform.forward, target.position - transform.position) >= 90)
+            return;
+
         // If a raycast from the barrel hits the player
         if (Physics.Raycast(firePoint.position, target.position - firePoint.position, out RaycastHit hit, 50, mask) && hit.transform == target)
         {
