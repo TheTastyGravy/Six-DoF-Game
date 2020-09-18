@@ -6262,7 +6262,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-75816
+  m_Name: pb_Mesh133674
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9659,6 +9659,7 @@ GameObject:
   - component: {fileID: 842223690}
   - component: {fileID: 842223689}
   - component: {fileID: 842223696}
+  - component: {fileID: 842223688}
   - component: {fileID: 842223695}
   m_Layer: 0
   m_Name: Door
@@ -9667,6 +9668,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &842223688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842223687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d7c720ee2f558144b8344671443f42e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveTime: 2
+  movement: {x: 0, y: 0, z: 5}
 --- !u!114 &842223689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9986,7 +10001,7 @@ MonoBehaviour:
   allEnemiesKilled:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 842223689}
+      - m_Target: {fileID: 842223688}
         m_MethodName: StartMoving
         m_Mode: 1
         m_Arguments:
@@ -13482,7 +13497,7 @@ PrefabInstance:
     - target: {fileID: 543548375321048551, guid: caaa35c1b58b2b8478a6748848ac0c5d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 48.266
+      value: 48
       objectReference: {fileID: 0}
     - target: {fileID: 543548375321048551, guid: caaa35c1b58b2b8478a6748848ac0c5d,
         type: 3}
@@ -19990,7 +20005,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh82342
+  m_Name: pb_Mesh133900
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
