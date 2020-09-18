@@ -5,14 +5,14 @@ using UnityEngine;
 public class ShootScript : MonoBehaviour
 {
     // The projectile prefab
-    public GameObject proj;
-    public float projForce;
+    [SerializeField] protected GameObject proj;
+    [SerializeField] protected float projForce;
 
     // Where should the bullet be created?
     [SerializeField] protected Transform firePoint;
 
-    [Min(0f)] public float damage = 1f;
-    [Min(0)] public int ammoCost = 1;
+    [Min(0), SerializeField] protected float damage = 1f;
+    [Min(0), SerializeField] protected int ammoCost = 1;
 
     /// <summary>
     /// Not implemented by the ShootScript, must be done by the script calling Shoot
