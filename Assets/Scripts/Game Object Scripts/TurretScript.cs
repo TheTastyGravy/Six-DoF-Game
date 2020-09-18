@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ShootScript))]
-public class TurretScript : MonoBehaviour
+public class TurretScript : EnemyScript
 {
     ShootScript shootScript;
     LayerMask mask;
 
+        [Space]
     [Tooltip("If left empty, it will be set to the player")]
     [SerializeField] Transform target;
     [SerializeField] Transform rotationPoint;
     [SerializeField] Transform firePoint;
-        [Space]
-    public float health = 5;
 
 
     void Awake()
@@ -29,7 +28,7 @@ public class TurretScript : MonoBehaviour
         // Create a mask to ignore the two layers
         mask = ~LayerMask.GetMask("TurretIgnore", "Projectiles");
     }
-    // Start is called after other scnes have loaded, s the player will exist
+    // Start is called after other scnes have loaded, so the player will exist
     void Start()
     {
         // If the target hasnt been set, use the player
@@ -55,21 +54,6 @@ public class TurretScript : MonoBehaviour
         {
             // Face forward
             rotationPoint.localRotation = Quaternion.identity;
-        }
-    }
-
-
-    public void DealDamage(float damage)
-    {
-        // Ignore negitive damage
-        if (damage <= 0)
-            return;
-
-        health -= damage;
-
-        if (health <= 0)
-        {
-            Destroy(gameObject);
         }
     }
 }
